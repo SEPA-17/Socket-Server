@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.text.ParseException;
 
 /***
  * 
@@ -17,14 +16,18 @@ import java.text.ParseException;
  * 
  * Tommorrow will take us away, f
  */
-public class SmartMeterServer extends Throwable {
+public class SmartMeterServer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3341121932816792313L;
 	private ServerSocket fServerSocket = null;
 
 	public SmartMeterServer(String aSocket) throws SmartMeterServerException {
 		// TODO Auto-generated constructor stub
 		try {
 			Integer lSocket = Integer.parseInt(aSocket);
-			ServerSocket ss = new ServerSocket(lSocket);
+			fServerSocket = new ServerSocket(lSocket);
 			
 			//catch the integer failing, and throw new exception up the heirachy
 		} catch(NumberFormatException | IOException  e) {

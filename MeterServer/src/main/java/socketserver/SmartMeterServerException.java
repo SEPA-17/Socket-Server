@@ -7,6 +7,11 @@ package socketserver;
  *
  */
 public class SmartMeterServerException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public SmartMeterServerException(String message) {
 		super(message);
 	}
