@@ -1,5 +1,8 @@
 
 
+import socketserver.SmartMeterServer;
+import socketserver.SmartMeterServerException;
+
 import java.io.IOException;
 
 /**
@@ -13,12 +16,12 @@ import java.io.IOException;
 public class Main {
 	
 	
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 	//Starts the whole #!. Change IP address here
 	//might change this to load from a configuration file
 		
 		//String ipAddress = args[1];
-		String socket = args[0];
+		String socket = "1234";// args[0];
 		
 			try {
 				SmartMeterServer s = new SmartMeterServer(socket);
