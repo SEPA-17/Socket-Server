@@ -51,10 +51,9 @@ public class ClientHandler extends Thread {
 				}
 				
 				
-				this.fDataOutputStream.writeChars("Java Server Received " + fSmartMeterData.size() +" lines of Data!");
+				this.fDataOutputStream.writeBytes("Java Server Received " + fSmartMeterData.size() +" lines of Data!");
 				this.fDataOutputStream.flush();
 				this.fDataOutputStream.close();
-				this.fDataInputStream.close();
 				this.fSocket.close();
 				
 				//push the data out into the Database.
