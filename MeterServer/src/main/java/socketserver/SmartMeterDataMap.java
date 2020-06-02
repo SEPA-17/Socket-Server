@@ -26,6 +26,24 @@ public class SmartMeterDataMap {
 		fDataMap.put(aKey, aValue);
 	}
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(SmartMeterDataEnum key : fDataMap.keySet()) {
+			sb.append(key.toString());
+			sb.append(":");
+			
+			if(fDataMap.get(key) == null){
+				sb.append("<NULL>");
+			} else sb.append(fDataMap.get(key).toString());
+			sb.append(" ");
+		}
+		
+		
+		
+		return sb.toString();
+		
+	}
+	
 	
 
 }

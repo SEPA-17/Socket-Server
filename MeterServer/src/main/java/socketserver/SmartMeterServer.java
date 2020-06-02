@@ -28,7 +28,6 @@ public class SmartMeterServer {
 		try {
 			Integer lSocket = Integer.parseInt(aSocket);
 			fServerSocket = new ServerSocket(lSocket);
-			
 			//catch the integer failing, and throw new exception up the heirachy
 		} catch(NumberFormatException | IOException  e) {
 			throw new SmartMeterServerException("Error Intialising ServerSocket: " + e.getStackTrace());

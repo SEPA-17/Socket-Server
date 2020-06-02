@@ -38,11 +38,22 @@ public class ClientHandler extends Thread {
 	 */
 	public void run() {
 			try {
-		 		DataReader lReader = new CSVDataReader(this.fDataInputStream,this.fSmartMeterData);
+		 		//DataReader lReader = new CSVDataReader(this.fDataInputStream,this.fSmartMeterData);
+				
+				DataReader lReader = new SMRStreamReader(this.fDataInputStream,this.fSmartMeterData);
 				//if we are able to successfully parse the data, then move on.
 				//the stored data is now located in the handler fSmartMeterData field.
 		 		//it is now safe to close the input stream
 				lReader.parse();
+				
+				for(SmartMeterDataMap s : fSmartMeterData) {
+					System.out.println(s.toString());
+				}
+				
+				
+				this.fDataOutputStream.writeChars("Java Server Received " + fSmartMeterData.size() +" lines of Data!");
+				this.fDataOutputStream.flush();
+				this.fDataOutputStream.close();
 				this.fDataInputStream.close();
 				this.fSocket.close();
 				
@@ -52,6 +63,8 @@ public class ClientHandler extends Thread {
 				//depending on the exceptions thrown, we have to do different things.
 				//for the most part, we cannot let exceptions leave this handler, else risk crashing the whole server.
 				//which is not good
+				//System.out.println(e.getMessage());
+				e.printStackTrace();
 				
 				
 				}
@@ -59,13 +72,14 @@ public class ClientHandler extends Thread {
 		// Now we want the output data. here we will try write data out.
 			
 			try {
-				SQLDataWriter lWriter = new SQLDataWriter(this.fSmartMeterData);
-				lWriter.run();
+				//SQLDataWriter lWriter = new SQLDataWriter(this.fSmartMeterData);
+				//lWriter.run();
 			}
 			catch (Exception e) {
 				//depending on the exceptions thrown, we have to do different things.
 				//for the most part, we cannot let exceptions leave this handler, else risk crashing the whole server.
 				//also, as this exception is in the writing phase, we may want to not throw away the collected data.
+				e.printStackTrace();
 				
 				
 				}
