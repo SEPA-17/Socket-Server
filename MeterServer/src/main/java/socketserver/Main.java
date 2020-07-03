@@ -18,7 +18,7 @@ public class Main {
 	//might change this to load from a configuration file
 		
 		//String ipAddress = args[1];
-		String socket = args[0];
+		String socket = "1234";//args[0];
 		
 			try {
 				SmartMeterServer s = new SmartMeterServer(socket);
