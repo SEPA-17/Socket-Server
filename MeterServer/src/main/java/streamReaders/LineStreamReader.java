@@ -1,22 +1,39 @@
-package socketserver;
+package streamReaders;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SMRStreamReader extends DataReader{
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import database.DataWriterThreadWorker;
+import socketserver.SmartMeterDataEnum;
+import socketserver.SmartMeterDataMap;
+
+public class LineStreamReader extends StreamReader{
+	private final Logger fLogger;
 	/*
 	 * Smartmeter Reader Stream Reader, allows the conntection of on going datastreams from a python connection.,
 	 */
-	protected SMRStreamReader(DataInputStream aDataInputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
-		super(aDataInputStream, aSmartMeterData);
+	/**
+	 * @param aDataInputStream
+	 * @param aSmartMeterData
+	 */
+	public LineStreamReader(DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
+		
+		super(aDataInputStream, aDataOutputStream, aSmartMeterData);
 		// TODO Auto-generated constructor stub
+		fLogger = LoggerFactory.getLogger(LineStreamReader.class);
 	}
 
 
 
 	@Override
 	public Boolean parse() throws IOException {
+		fLogger.debug("LineStreamReader Started");
+		
 		// TODO Auto-generated method stub
 		byte[] lBuffer = new byte[5];
 		//LinkedList<byte> lSentenceBuffer = new LinkedList<byte>();
@@ -26,11 +43,12 @@ public class SMRStreamReader extends DataReader{
 		boolean finsihedFlag = false;
 		StringBuilder sb = new StringBuilder();
 		while(!finsihedFlag) {
-			this.fInputStream.read(lBuffer);
+			
+			fInputStream.read(lBuffer);
 			for(byte b: lBuffer) {
 				if((char)b == '\n' || (char)b == '\r') {
 					
-					System.out.println("\nProcessed a new line: " + sb.toString());
+					fLogger.debug("Processed a new line: " + sb.toString());
 				
 					String[] lValues = sb.toString().split(",");
 					
@@ -64,6 +82,10 @@ public class SMRStreamReader extends DataReader{
 					sb.append((char)b);
 					System.out.print((char)b);
 				}
+				
+				super.fOutputStream.writeBytes("Java Server Received " + fSmartMeterData.size() +" lines of Data!");
+				super.fOutputStream.flush();
+				super.fOutputStream.close();
 			}
 			
 			
