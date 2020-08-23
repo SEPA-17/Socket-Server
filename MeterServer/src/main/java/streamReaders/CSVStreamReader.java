@@ -1,15 +1,19 @@
-package socketserver;
+package streamReaders;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class CSVDataReader extends DataReader {
+import socketserver.SmartMeterDataEnum;
+import socketserver.SmartMeterDataMap;
 
-	protected CSVDataReader(DataInputStream aDataInputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
-		super(aDataInputStream, aSmartMeterData);
+public class CSVStreamReader extends StreamReader {
+
+	protected CSVStreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
+		super(aDataInputStream, aOutputStream, aSmartMeterData);
 		// TODO Auto-generated constructor stub
 	}
 
