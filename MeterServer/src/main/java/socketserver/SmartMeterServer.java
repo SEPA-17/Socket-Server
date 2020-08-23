@@ -61,7 +61,6 @@ public class SmartMeterServer {
 			
 	public void run() throws IOException {
 		// no expection block in this try statement should cause the server to exit.
-		
 		//Master Loop.
 		while(true) {
 			Socket lSocket = null;

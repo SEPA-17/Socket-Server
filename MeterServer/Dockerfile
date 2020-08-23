@@ -16,4 +16,5 @@ ADD ${JAR_LIB_FILE} lib/
 EXPOSE 1234
 
 # java -jar /usr/local/runme/app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+# deay entry so we can start container with an interactive shell.
+#ENTRYPOINT ["java","-jar","app.jar"]
