@@ -53,7 +53,7 @@ public static void main(String args[]) {
 			
 			//DataWriter manager setup
 			DataWriterThreadManager lDWTM = new DataWriterThreadManager(
-					lConfig.getInteger("dataWriter.noOfWorkerThreads", 5), 
+					lConfig.getInteger("datawriter.noofworkerthreads", 5), 
 					lQueue
 					);
 			
