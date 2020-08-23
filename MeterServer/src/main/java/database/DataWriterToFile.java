@@ -51,15 +51,16 @@ public class DataWriterToFile {
 					sb.append(":");
 					
 					//if there is no data in this position, add the <NULL> string.
-					if(lLine.getValueAt(lEnum).isEmpty()) {
+					if(lLine.getValueAt(lEnum) == null) {
 						sb.append("<NULL>");
 						
 					} else {
 						sb.append(lLine.getValueAt(lEnum));
 					}
 					sb.append(" , ");
-				lOutput.println(sb.toString());
+				
 				}
+				lOutput.println(sb.toString());
 			}
 			
 		} catch (IOException e) {

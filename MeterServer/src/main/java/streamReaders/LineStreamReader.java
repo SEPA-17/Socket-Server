@@ -14,6 +14,7 @@ import socketserver.SmartMeterDataMap;
 
 public class LineStreamReader extends StreamReader{
 	private final Logger fLogger;
+	private final Integer fWorkerID;
 	/*
 	 * Smartmeter Reader Stream Reader, allows the conntection of on going datastreams from a python connection.,
 	 */
@@ -21,11 +22,12 @@ public class LineStreamReader extends StreamReader{
 	 * @param aDataInputStream
 	 * @param aSmartMeterData
 	 */
-	public LineStreamReader(DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
+	public LineStreamReader(DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData,Integer aWorkerID) {
 		
 		super(aDataInputStream, aDataOutputStream, aSmartMeterData);
 		// TODO Auto-generated constructor stub
 		fLogger = LoggerFactory.getLogger(LineStreamReader.class);
+		fWorkerID = aWorkerID;
 	}
 
 
@@ -83,15 +85,16 @@ public class LineStreamReader extends StreamReader{
 					System.out.print((char)b);
 				}
 				
-				super.fOutputStream.writeBytes("Java Server Received " + fSmartMeterData.size() +" lines of Data!");
-				super.fOutputStream.flush();
-				super.fOutputStream.close();
+				
+				
 			}
 			
 			
 		}
 		//print the final message
-		
+		super.fOutputStream.writeBytes("Java Server Worker " + fWorkerID + " sent " + fSmartMeterData.size() +" lines of Data!");
+	    super.fOutputStream.flush();
+	    super.fOutputStream.close();
 		System.out.println("Finished!");
 		
 		

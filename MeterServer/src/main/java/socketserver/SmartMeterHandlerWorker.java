@@ -27,7 +27,8 @@ public class SmartMeterHandlerWorker extends Thread {
 	
 	private final ArrayList<SmartMeterDataMap> fSmartMeterData;
 	private final Semaphore fCounterSemaphore;
-	private  DataQueue fSmartMeterDataQueue;
+	private final  DataQueue fSmartMeterDataQueue;
+	private final Integer fWorkerID;
 	
 	private final Logger fLogger;
 	
@@ -41,16 +42,17 @@ public class SmartMeterHandlerWorker extends Thread {
 	 * @param aDataOutputStream The output stream used to message back to the Smartmeter server of status, etc
 	 * @param aSemaphore This is used to signal the Master/Boss thread that this has completed.
 	 */
-	public SmartMeterHandlerWorker(Socket aSocket, DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, Semaphore aCounterSemaphore, DataQueue aSmartMeterDataQueue) {
+	public SmartMeterHandlerWorker(Integer aWorkerID, Socket aSocket, DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, Semaphore aCounterSemaphore, DataQueue aSmartMeterDataQueue) {
 		//assign the member varibles to the arguments
 		fSmartMeterData = new ArrayList<SmartMeterDataMap>();
 		fSocket = aSocket;
 		fDataOutputStream = aDataOutputStream;
 		fDataInputStream = aDataInputStream;	
 		fCounterSemaphore = aCounterSemaphore;
+		fWorkerID = aWorkerID;
 		
 		//the data queue
-		DataQueue fDataQueueManager;
+		fSmartMeterDataQueue = aSmartMeterDataQueue;
 	
 		//set up the logger
 		fLogger = LoggerFactory.getLogger(SmartMeterHandlerWorker.class);
@@ -65,7 +67,7 @@ public class SmartMeterHandlerWorker extends Thread {
 			try {
 		 		
 				//Line Stream reader is a test reader.
-				StreamReader lReader = new LineStreamReader(fDataInputStream, fDataOutputStream, fSmartMeterData);
+				StreamReader lReader = new LineStreamReader(fDataInputStream, fDataOutputStream, fSmartMeterData, fWorkerID);
 				//if we are able to successfully parse the data, then add the ArrayList to the queue to be pushed to the SQL.
 				//database
 				//the stored data is now located in the ArrayList fSmartMeterData.
@@ -83,13 +85,17 @@ public class SmartMeterHandlerWorker extends Thread {
 					return;
 				}
 				
+				
 				//we have succefully parsed the data input from the smart meter. Now we need to push this to the DataQueue for the 
 				//SQLDatabase worker threads to push to the 
 				
 				//TODO might move this message system into the Reader class
-				StringBuilder sb = new StringBuilder("Logger Succefully read ");
+				StringBuilder sb = new StringBuilder(this.getClass().getName());
+				sb.append(".");
+				sb.append(lReader.getClass().getName());
+				sb.append(" successfully read ");
 				sb.append(fSmartMeterData.size());
-				sb.append("lines of data from device");
+				sb.append(" lines of data from device");
 				sb.append(fSocket.getInetAddress());
 				sb.append(":");
 				sb.append(fSocket.getPort());

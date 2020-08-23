@@ -31,6 +31,7 @@ public class SmartMeterServer {
 	 * Constructor for the SmartMeterServer. 
 	 * @param aListenPortNumber The port number that will be listen on for incomming connections
 	 * @param aMaxNumberOfConnections THe maximum number of connections that the server will hold before it refuses more connections
+	 * @param aSmartMeterDataQueue 
 	 * @param aDataQueueManager The DataQueueManager that the incoming data will be sent to
 	 * @throws SmartMeterServerException 
 	 */
@@ -79,7 +80,8 @@ public class SmartMeterServer {
 				fLogger.info(sb.toString());
 				
 				//start a new thread for this socket. This thread will release it the sempaphore permit when it has completed.
-				Thread t = new SmartMeterHandlerWorker(lSocket, lDataInputStream, lDataOutputStream,fCounterSemaphore,fSmartMeterDataQueue);
+				Integer lWorkerID = fCounterSemaphore.availablePermits() ;
+				Thread t = new SmartMeterHandlerWorker(lWorkerID, lSocket, lDataInputStream, lDataOutputStream,fCounterSemaphore,fSmartMeterDataQueue);
 				t.start();
 				
 				
