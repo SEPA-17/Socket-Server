@@ -15,6 +15,7 @@ public class SmartMeterDataMap {
 	
 	public SmartMeterDataMap() {
 		fDataMap = new EnumMap<SmartMeterDataEnum,String>(SmartMeterDataEnum.class);
+		
 	}
 	
 	
@@ -57,6 +58,15 @@ public class SmartMeterDataMap {
 		return sb.toString();
 		
 	}
+	
+	/**
+	 * Clears all values in the data map. this sets them to NULL.
+	 */
+	public void clear() {
+		fDataMap.clear();
+	}
+	
+	
 	
 	
 

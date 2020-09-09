@@ -35,6 +35,10 @@ import database.DataWriterThreadManager;
 public class Main {
 //	private static final Logger fLogger ;
 	
+/**
+ * The Main server processes kicks off here
+ * @param args
+ */
 public static void main(String args[]) {
 	   ClassLoader cl = ClassLoader.getSystemClassLoader();
 
