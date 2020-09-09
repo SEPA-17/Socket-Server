@@ -50,10 +50,10 @@ public class DataWriterToDatabase {
 		try {
 			connection = connectionDatabase.connect();
 			System.out.println("Successful Connection to Database");
-			fLogger.info("Successful connection.");
+			fLogger.error("Successful connection.");
 		} catch (SQLException e) {
 			System.out.println("Error Connect to Database: " + e);
-			fLogger.info("Error connecting to DB.");
+			fLogger.error("Error connecting to DB.");
 
 		}
 

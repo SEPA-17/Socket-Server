@@ -44,7 +44,7 @@ public class ServerToDatabase {
         fConfigs = new Configurations();
         fConfig = fConfigs.properties(new File("serversocket.properties"));
 
-        Integer PORT = fConfig.getInteger("DBPORT", 8889);
+        Integer PORT = fConfig.getInteger("DBPORT", 3306);
         String DBNAME = fConfig.getString("DBNAME", "db");
 
         this.URL = "jdbc:mysql://" + fConfig.getString("DBHOSTNAME", "localhost") + ":" + PORT + "/" + DBNAME;
