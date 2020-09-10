@@ -32,13 +32,18 @@ import database.DataWriterThreadManager;
  */
 
 public class Main {
-	// private static final Logger fLogger ;
+//	private static final Logger fLogger ;
+	
+/**
+ * The Main server processes kicks off here
+ * @param args
+ */
+public static void main(String args[]) {
+	   ClassLoader cl = ClassLoader.getSystemClassLoader();
 
-	public static void main(String args[]) {
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
-
-		// set up the systems properties
-		Configurations lConfigs = new Configurations();
+	   
+	   //set up the systems properties
+	   Configurations lConfigs = new Configurations();
 
 		try {
 			Configuration lConfig = lConfigs.properties(new File("serversocket.properties"));
