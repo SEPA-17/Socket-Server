@@ -112,27 +112,15 @@ public class SmartMeterHandlerWorker extends Thread {
 				//for the most part, we cannot let exceptions leave this handler, else risk crashing the whole server.
 				//which is not good
 				//System.out.println(e.getMessage());
-				e.printStackTrace();
+				fLogger.error(e.getMessage());
+				//e.printStackTrace();
 				
 				
 				}
 			
-		// Now we want the output data. here we will try write data out.
-			
-			try {
-				//SQLDataWriter lWriter = new SQLDataWriter(this.fSmartMeterData);
-				//lWriter.run();
-			}
-			catch (Exception e) {
-				//depending on the exceptions thrown, we have to do different things.
-				//for the most part, we cannot let exceptions leave this handler, else risk crashing the whole server.
-				//also, as this exception is in the writing phase, we may want to not throw away the collected data.
-				e.printStackTrace();
-				
-				
-				} 
 			finally {
 				//release the Semaphore so new connections can be created.
+				fLogger.info("Worker" + fWorkerID + "has completed reading from  input.");
 				fCounterSemaphore.release();
 				}
 
