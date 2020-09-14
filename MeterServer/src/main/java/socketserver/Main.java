@@ -46,8 +46,6 @@ public static void main(String args[]) {
 			Configuration lConfig = lConfigs.properties(new File("serversocket.properties"));
 			System.out.println(lConfig.getString("project.message"));
 
-
-			   
 			 //DataQueue setup
 			DataQueue lQueue = new DataQueue(lConfig.getInteger("dataqueue.length", 40));
 			
