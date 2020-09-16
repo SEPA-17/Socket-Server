@@ -30,7 +30,7 @@ public class DataWriterToDatabase {
 
 	private static String SQL_FIND_METER = "SELECT MeterId FROM Meter WHERE MeterId = ?";
 	private static String SQL_METER = "INSERT INTO Meter (MeterId) VALUES (?)";
-	private static String SQL_METER_DATA = "INSERT INTO MeterData (MeterId, ReadAt, KWH, KW, KVA, KVAr, Ph1i, Ph2i, Ph3i, Ph1v, Ph2v, Ph3v, PF) VALUES (?, STR_TO_DATE(?, '%m/%d/%y %H:%i:%s'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1.0)";
+	private static String SQL_METER_DATA = "INSERT INTO MeterData (MeterId, ReadAt, KWH, KW, KVA, KVAr, Ph1i, Ph2i, Ph3i, Ph1v, Ph2v, Ph3v, PF) VALUES (?, STR_TO_DATE(?, '%d/%m/%y %H:%i:%s'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1.0)";
 
 	/**
 	 * Write the data to the Database
@@ -51,6 +51,7 @@ public class DataWriterToDatabase {
 			fLogger.debug("Successful connection to the Database");
 		} catch (SQLException e) {
 			fLogger.error("Unsuccessful connection to the Database");
+			System.out.println(e);
 		}
 
 		PreparedStatement prepSqlFindMeter = connection.prepareStatement(SQL_FIND_METER);
@@ -82,6 +83,7 @@ public class DataWriterToDatabase {
 					}
 				}
 			}
+			System.out.println(prepSqlMeterData);
 			prepSqlMeterData.executeUpdate();
 		}
 		connection.close();

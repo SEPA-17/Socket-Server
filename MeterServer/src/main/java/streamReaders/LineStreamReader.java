@@ -80,7 +80,7 @@ public class LineStreamReader extends StreamReader {
 					break;
 				} else {
 					sb.append((char) b);
-					fLogger.debug("byte:" + (char) b);
+					// fLogger.debug("byte:" + (char) b);
 				}
 
 			}

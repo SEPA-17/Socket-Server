@@ -1,6 +1,6 @@
 FROM java:8-jdk-alpine
 
-ARG JAR_FILE=target/threadPoolTest.jar
+ARG JAR_FILE=target/ZodicomMeterServer.jar
 ARG JAR_LIB_FILE=target/lib/
 
 WORKDIR /usr/local/runme

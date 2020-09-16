@@ -36,7 +36,8 @@ public class ServerToDatabase {
         Integer PORT = fConfig.getInteger("DBPORT", 3306);
         String DBNAME = fConfig.getString("DBNAME", "db");
 
-        this.URL = "jdbc:mysql://" + fConfig.getString("DBHOSTNAME", "localhost") + ":" + PORT + "/" + DBNAME;
+        this.URL = "jdbc:mysql://" + fConfig.getString("DBHOSTNAME", "localhost") + ":" + PORT + "/" + DBNAME
+                + "?useTimezone=true&serverTimezone=UTC";
         this.USERNAME = fConfig.getString("DBUSER", "root");
         this.PASSWORD = fConfig.getString("DBPASS", "root");
     }
