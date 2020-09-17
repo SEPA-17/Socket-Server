@@ -83,7 +83,6 @@ public class DataWriterToDatabase {
 					}
 				}
 			}
-			System.out.println(prepSqlMeterData);
 			prepSqlMeterData.executeUpdate();
 		}
 		connection.close();

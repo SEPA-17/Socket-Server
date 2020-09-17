@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
 
 import database.DataWriterThreadManager;
 
-
-/** The point of entry for the Program.
- * Commons COnfiguration package is used for loading configuration settings from file
+/**
+ * The point of entry for the Program. Commons COnfiguration package is used for
+ * loading configuration settings from file
  * 
  * Logback is used for logging messages and information
  * 
@@ -31,55 +31,39 @@ import database.DataWriterThreadManager;
  *
  */
 
-
 public class Main {
-//	private static final Logger fLogger ;
-	
-public static void main(String args[]) {
-	   ClassLoader cl = ClassLoader.getSystemClassLoader();
+	// private static final Logger fLogger ;
 
-	   
-	   //set up the systems properties
-	   Configurations lConfigs = new Configurations();
-		
+	public static void main(String args[]) {
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+		// set up the systems properties
+		Configurations lConfigs = new Configurations();
+
 		try {
 			Configuration lConfig = lConfigs.properties(new File("serversocket.properties"));
 			System.out.println(lConfig.getString("project.message"));
 
-			 //DataQueue setup
+			// DataQueue setup
 			DataQueue lQueue = new DataQueue(lConfig.getInteger("dataqueue.length", 40));
-			
-			//DataWriter manager setup
+
+			// DataWriter manager setup
 			DataWriterThreadManager lDWTM = new DataWriterThreadManager(
-					lConfig.getInteger("datawriter.noofworkerthreads", 5), 
-					lQueue
-					);
-			
-			//SmartMeter Server startup
-			SmartMeterServer lServer = new SmartMeterServer(
-					lConfig.getInteger("smartmeterserver.portnumber", 1234),
-					lConfig.getInteger("smartmeterserver.maxconnections", 20),
-					lQueue
-					);
-			
-			
-			
-			   
-			//kick off the processes
+					lConfig.getInteger("datawriter.noofworkerthreads", 5), lQueue);
+
+			// SmartMeter Server startup
+			SmartMeterServer lServer = new SmartMeterServer(lConfig.getInteger("smartmeterserver.portnumber", 1234),
+					lConfig.getInteger("smartmeterserver.maxconnections", 20), lQueue);
+			// kick off the processes
 			lDWTM.run();
-			
-			//main thread chills out in this process for now
+
+			// main thread chills out in this process for now
 			lServer.run();
-		
-			
-			
-				
-				//s.start();
-		}
-		catch(org.apache.commons.configuration2.ex.ConfigurationException cex)
-		{
+
+			// s.start();
+		} catch (org.apache.commons.configuration2.ex.ConfigurationException cex) {
 			System.out.println(cex.toString());
-			
+
 		} catch (SmartMeterServerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,13 +71,10 @@ public static void main(String args[]) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	   
-	
-       }
-       //create a new SocketServerInstance,
-       //create a new DataQueue instance
-       //create a new S
-       
+
+	}
+	// create a new SocketServerInstance,
+	// create a new DataQueue instance
+	// create a new S
+
 }
-
-
