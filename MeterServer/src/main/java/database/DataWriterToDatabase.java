@@ -1,6 +1,11 @@
 package database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import socketserver.ServerToDatabase;
@@ -48,6 +53,10 @@ public class DataWriterToDatabase {
 			fLogger.debug("Successful connection to the Database");
 		} catch (SQLException e) {
 			fLogger.error("Unsuccessful connection to the Database");
+			System.out.println(connectionDatabase.URL);
+			System.out.println(connectionDatabase.PASSWORD);
+			System.out.println(connectionDatabase.USERNAME);
+
 			System.out.println(e);
 		}
 
