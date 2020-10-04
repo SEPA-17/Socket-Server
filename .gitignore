@@ -190,3 +190,5 @@ vendor/pkg/
 pyenv
 Vagrantfile
 
+.vscode/
+
