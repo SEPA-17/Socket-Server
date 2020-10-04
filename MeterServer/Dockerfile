@@ -18,4 +18,4 @@ ADD ${JAR_LIB_FILE} lib/
 EXPOSE 1234
 
 # java -jar /usr/local/runme/app.jar
-#ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]

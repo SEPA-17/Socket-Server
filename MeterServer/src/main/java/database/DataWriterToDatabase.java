@@ -56,7 +56,6 @@ public class DataWriterToDatabase {
 			System.out.println(connectionDatabase.URL);
 			System.out.println(connectionDatabase.PASSWORD);
 			System.out.println(connectionDatabase.USERNAME);
-
 			System.out.println(e);
 		}
 
