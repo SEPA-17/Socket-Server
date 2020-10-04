@@ -32,18 +32,13 @@ import database.DataWriterThreadManager;
  */
 
 public class Main {
-//	private static final Logger fLogger ;
-	
-/**
- * The Main server processes kicks off here
- * @param args
- */
-public static void main(String args[]) {
-	   ClassLoader cl = ClassLoader.getSystemClassLoader();
+	// private static final Logger fLogger ;
 
-	   
-	   //set up the systems properties
-	   Configurations lConfigs = new Configurations();
+	public static void main(String args[]) {
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
+
+		// set up the systems properties
+		Configurations lConfigs = new Configurations();
 
 		try {
 			Configuration lConfig = lConfigs.properties(new File("serversocket.properties"));
@@ -59,7 +54,6 @@ public static void main(String args[]) {
 			// SmartMeter Server startup
 			SmartMeterServer lServer = new SmartMeterServer(lConfig.getInteger("smartmeterserver.portnumber", 1234),
 					lConfig.getInteger("smartmeterserver.maxconnections", 20), lQueue);
-
 			// kick off the processes
 			lDWTM.run();
 

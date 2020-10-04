@@ -65,10 +65,7 @@ public class DataWriterThreadWorker extends Thread {
 
 				try {
 					lDataWriter.write(lDataToPush);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ConfigurationException e) {
+				} catch (SQLException | ConfigurationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
