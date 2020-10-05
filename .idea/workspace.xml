@@ -16,20 +16,12 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:docker-testing" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97423625-03fc-41d4-a62c-0391316aded3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterServer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MeterServer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterServer/src/main/java/database/DataWriterToDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeterServer/src/main/java/database/DataWriterToDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeterServer/src/main/java/socketserver/ServerToDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/MeterServer/src/main/java/socketserver/ServerToDatabase.java" afterDir="false" />
+    <list default="true" id="5c155ea5-e169-4d2b-94ab-a834db66e237" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/socketserver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/socketserver/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,12 +32,20 @@
     <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
-  <component name="ProjectId" id="1ckl1p4TTH446yCkTlwr7QO0pf5" />
+  <component name="ProjectId" id="1cCgdUfT2BoAZjsHm0huleQFTEd" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -54,128 +54,63 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/MeterServer" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/target" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="socketserver.Main" />
-      <module name="Socket-Server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="socketserver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="97423625-03fc-41d4-a62c-0391316aded3" name="Default Changelist" comment="" />
-      <created>1591080259136</created>
+      <changelist id="5c155ea5-e169-4d2b-94ab-a834db66e237" name="Default Changelist" comment="" />
+      <created>1590038077173</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1591080259136</updated>
+      <updated>1590038077173</updated>
     </task>
     <servers />
   </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="*.bat" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="docker-testing" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="208" y="31" key="#Project_Structure" timestamp="1593740727812">
+    <state x="208" y="23" width="1024" height="834" key="SettingsEditor" timestamp="1590102011103">
+      <screen x="0" y="23" width="1440" height="834" />
+    </state>
+    <state x="208" y="23" width="1024" height="833" key="SettingsEditor/0.23.1440.833@0.23.1440.833" timestamp="1590040731457" />
+    <state x="208" y="23" width="1024" height="834" key="SettingsEditor/0.23.1440.834@0.23.1440.834" timestamp="1590102011103" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1593747090434">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="208" y="31" key="#Project_Structure/0.0.1440.900@0.0.1440.900" timestamp="1593740727812" />
-    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598219253472">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="304" y="187" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1050/1680.-95.1920.1080@0.0.1680.1050" timestamp="1598219253472" />
-    <state width="819" height="295" key="GridCell.Tab.0.bottom" timestamp="1600061113061">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="819" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1600061113061" />
-    <state width="819" height="295" key="GridCell.Tab.0.center" timestamp="1600061113060">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="819" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1600061113060" />
-    <state width="819" height="295" key="GridCell.Tab.0.left" timestamp="1600061113059">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="819" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1600061113059" />
-    <state width="819" height="295" key="GridCell.Tab.0.right" timestamp="1600061113060">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state width="819" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1600061113060" />
-    <state x="1975" y="-36" width="1024" height="835" key="SettingsEditor" timestamp="1600673571635">
-      <screen x="1680" y="-95" width="1920" height="1080" />
-    </state>
-    <state x="221" y="23" width="1024" height="835" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1593740508576" />
-    <state x="258" y="57" key="SettingsEditor/0.0.1680.1050/1680.-95.1920.1080@0.0.1680.1050" timestamp="1598222664680" />
-    <state x="1975" y="-36" key="SettingsEditor/0.0.1680.1050/1680.-95.1920.1080@1680.-95.1920.1080" timestamp="1600673571635" />
-    <state x="258" y="57" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1600061080370" />
-    <state x="467" y="375" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1598221376876">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="467" y="375" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1680.1050/1680.-95.1920.1080@0.0.1680.1050" timestamp="1598221376876" />
-    <state x="569" y="327" width="670" height="692" key="search.everywhere.popup" timestamp="1598219918131">
-      <screen x="0" y="0" width="1680" height="1050" />
-    </state>
-    <state x="569" y="327" width="670" height="692" key="search.everywhere.popup/0.0.1680.1050/1680.-95.1920.1080@0.0.1680.1050" timestamp="1598219918131" />
-    <state x="569" y="343" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027/1680.-72.1920.1057@0.23.1680.1027" timestamp="1598219806870" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1593747090434" />
   </component>
 </project>
