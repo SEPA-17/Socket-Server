@@ -17,5 +17,5 @@ ADD ${JAR_LIB_FILE} lib/
 # Expose server socket port
 EXPOSE 1234
 
-# java -jar /usr/local/runme/app.jar
+# java -jar /usr/local/runme/app.jar ok
 ENTRYPOINT ["java","-jar","app.jar"]
