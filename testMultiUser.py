@@ -39,7 +39,6 @@ def connect_to_server(threadName, delay):
             + ":"
             + str(s.getsockname()[1])
         )
-
         while cnt < (int(numberOfPackets)):
             count = str(cnt)
             time.sleep(delay)
@@ -73,8 +72,8 @@ def connect_to_server(threadName, delay):
 
 ipaddressString = "127.0.0.1"
 portNumberString = "1234"
-numberOfThreads = "5"
-numberOfPackets = "2"
+numberOfThreads = "10"
+numberOfPackets = "10"
 
 
 print(
@@ -94,7 +93,7 @@ flag = False
 try:
     maxThreads = int(numberOfThreads)
     for x in range(0, maxThreads):
-        name = "%s" % x
+        name = "%s" % (x + 1)
         _thread.start_new_thread(connect_to_server, (name, 2))
     #  time.sleep(2)
 
