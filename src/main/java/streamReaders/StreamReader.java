@@ -16,14 +16,12 @@ public abstract  class StreamReader {
 	protected final DataOutputStream fOutputStream;
 	protected final ArrayList<SmartMeterDataMap> fSmartMeterData;
 	protected  Logger fLogger;
-	private final Integer fWorkerID;
 	
-	public StreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData, Integer aWorkerID) {
+	protected StreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
 		fInputStream = aDataInputStream;
 		fOutputStream = aOutputStream;
 		fSmartMeterData = aSmartMeterData;
 		fLogger = LoggerFactory.getLogger(StreamReader.class);
-		fWorkerID = aWorkerID;
 	}
 	
 	

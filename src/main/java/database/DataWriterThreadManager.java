@@ -9,24 +9,21 @@ import socketserver.DataQueue;
 import socketserver.SmartMeterHandlerWorker;
 
 /**
- * DatawriterThreadManager creates and managers worker threads that deal with pulling the data
- * off the queue, and doing some action with them. Ideally this will be connected with a DataWriterToDatabase, where
- * the data is pushed to an SQL database.
+ * SQLDatabaseThreadManager creates and managers the SQL Database thread workers.
 
  * @author Michael
  *
  */
 public class DataWriterThreadManager {
 	
-	protected DataQueue fDataQueue;
+	private DataQueue fDataQueue;
 	
-	protected final Integer fNumberOfWorkers;
+	private final Integer fNumberOfWorkers;
 	
-	protected final ArrayList<Thread> fWorkers;
+	private final ArrayList<Thread> fWorkers;
 	
 	/**
-	 * Creates and initializes the correct number of worker threads, which will pull data from the Queue to put into the database
-	 * 
+	 * Creates and intialises the correct number of 
 	 * @param aNumberOfWorkers
 	 * @param aDataQueue
 	 */

@@ -13,25 +13,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import socketserver.DataQueue;
+import socketserver.ServerToDatabase;
 import socketserver.SmartMeterDataEnum;
 import socketserver.SmartMeterDataMap;
 import socketserver.SmartMeterHandlerWorker;
 
 /**
- * This class pulls data of the DataQueue, and feeds it to a DataWriter, where
- * the DataWriter decideds how to process this data into the SQLDatabase.
+ * SQLDataBaseThreadWoker This class pulls data of the DataQueue, and feeds it
+ * into the SQLDatabase.
  * 
- * @author Heng, Michael S, Michael R.
+ * @author Heng, Michael
  *
  */
 public class DataWriterThreadWorker extends Thread {
 	private DataQueue fDataQueue;
-	protected Integer fWorkerIdentifier;
+	private Integer fWorkerIdentifier;
 	private final Logger fLogger;
 
 	/**
-	 * Create a new DataWriterThreadWorker thread. This is used to pull data off the
-	 * DataQueue, and push to the SQLDatabase.
+	 * Create a new SQLDatabaseThreadWorker thread. This is used to pull data off
+	 * the DataQueue, and push to the SQLDatabase.
 	 * 
 	 * @param aIdentifier The identifier of this worker thread assigned by the
 	 *                    manager
@@ -49,8 +50,7 @@ public class DataWriterThreadWorker extends Thread {
 
 	/**
 	 * Kicks of the process. Starts trying to pull data from the incoming queue and
-	 * starts.
-	 * 
+	 * starts
 	 */
 	public void run() {
 		fLogger.info("DataWriterThreadWorker " + fWorkerIdentifier + " is now running!");
@@ -65,15 +65,12 @@ public class DataWriterThreadWorker extends Thread {
 
 				try {
 					lDataWriter.write(lDataToPush);
-				} catch (SQLException e) {
-					fLogger.error(e.toString());
-					e.printStackTrace();
-				} catch (ConfigurationException e) {
-					fLogger.error(e.toString());
+				} catch (SQLException | ConfigurationException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			} catch (InterruptedException e) {
-				fLogger.error(e.toString());
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

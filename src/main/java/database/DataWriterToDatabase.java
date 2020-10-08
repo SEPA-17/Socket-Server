@@ -14,6 +14,7 @@ import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.beanutils.PropertyUtils;
 
+import socketserver.ServerToDatabase;
 import socketserver.SmartMeterDataEnum;
 import socketserver.SmartMeterDataMap;
 
@@ -24,7 +25,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Writes data output to Database.
  * 
- * @author Michael S
+ * @author Michael
  *
  */
 public class DataWriterToDatabase {

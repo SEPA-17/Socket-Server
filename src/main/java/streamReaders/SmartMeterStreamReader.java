@@ -54,7 +54,7 @@ public class SmartMeterStreamReader extends StreamReader {
 	 */
 	public SmartMeterStreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream,
 			ArrayList<SmartMeterDataMap> aSmartMeterData, Integer aWorkerID) {
-		super(aDataInputStream, aOutputStream, aSmartMeterData,aWorkerID);
+		super(aDataInputStream, aOutputStream, aSmartMeterData);
 		super.fLogger = LoggerFactory.getLogger(SmartMeterStreamReader.class);
 		fWorkerID = aWorkerID;
 	}
@@ -65,7 +65,7 @@ public class SmartMeterStreamReader extends StreamReader {
 	 * @return true if there was no error.
 	 */
 	public Boolean parse() throws IOException {
-		fLogger.debug("SmartMeterStreamReader Started Parsing on Thread " + fWorkerID);
+		fLogger.debug("LineStreamReader Started on Thread " + fWorkerID);
 
 		
 		String lSmartMeterID = readInIdentificationMessage();
@@ -74,28 +74,22 @@ public class SmartMeterStreamReader extends StreamReader {
 			return false;
 		}
 		
-		fLogger.debug(String.format("SmartMeterStreamReader %s processed a SmartMeter ID: Meter %s ", fWorkerID, lSmartMeterID));
+		
 		sendAcknolwedge();
 		
 		//now we do the bulk of the reading of the data
 		ArrayList<Byte> lBytes = new ArrayList<Byte>();
-		fLogger.debug(String.format("SmartMeterStreamReader %s processes %d bytes of data from SmartMeter %s", fWorkerID, lBytes.size(),lSmartMeterID));
-		
 		Integer lMessageFailCount = 0;
-		Byte lCalcedCheckChar, lSentCheckChar;
+		char lCalcedCheckChar, lSentCheckChar;
+		
+		
 		
 		//try receiving the data only 5 times.		
 		do {
-			//send nack if needed
-			if( lMessageFailCount > 0) sendNegativeAcknolwedge();
-			/* lSentCheckChar = (byte) readDataMessageIntoByteArray(lBytes);
-			 lCalcedCheckChar = (byte) calculateBlockCheckChar(lBytes);
-			 */
-			 lSentCheckChar = (byte) 1;
-			 lCalcedCheckChar = (byte) 1;
-			 fLogger.debug(String.format("SmartMeterStreamReader %s: recevied BCC is: %d the calcualted BCC is: %d. This is the %d attempt", fWorkerID,lSentCheckChar,lCalcedCheckChar,lMessageFailCount+1 ));
+			if(lMessageFailCount>0) sendNegativeAcknolwedge();
+			 lSentCheckChar = readDataMessageIntoByteArray(lBytes);
+			 lCalcedCheckChar = calculateBlockCheckChar(lBytes);
 			 lMessageFailCount++;
-			 //check the BCC with the calculated value, if there is a problem resend the data.
 		} while(lSentCheckChar != lCalcedCheckChar && lMessageFailCount < 5);
 		
 		//we have retried 5 times to get the data, and it has failed. return false from this.
@@ -116,7 +110,7 @@ public class SmartMeterStreamReader extends StreamReader {
 			
 			if( ((char) b.byteValue() == LF || (char) b.byteValue() == CR) && sb.length() > 0) {
 				
-				fLogger.debug(String.format("SmartMeterStreamReader %s processes a new line: Meter %s :  %s", fWorkerID), lSmartMeterID,sb.toString());
+				fLogger.debug(String.format("SmartMeterStreamReader %d processes a new line: Meter %s :  %s", fWorkerID), lSmartMeterID,sb.toString());
 				
 
 				String[] lValues = sb.toString().split(",");
@@ -175,7 +169,7 @@ public class SmartMeterStreamReader extends StreamReader {
 	 * @param lBytes
 	 * @return the calculated character from the character check.
 	 */
-	public char calculateBlockCheckChar(ArrayList<Byte> aBytes) {
+	private char calculateBlockCheckChar(ArrayList<Byte> aBytes) {
 	
 		byte lResult = 0;
 		for(Byte b: aBytes) {
@@ -214,50 +208,53 @@ public class SmartMeterStreamReader extends StreamReader {
 	 * @throws IOException
 	 */
 	private String readInIdentificationMessage() throws IOException {
-		//java printing bytes
-		fLogger.debug("SmartMeterStreamReader Started reading the ID message on Thread " + fWorkerID);
+		fLogger.debug("LineStreamReader Started on Thread " + fWorkerID);
 
 		boolean finsihedReadingData = false;
 		boolean seenStartCharacter = false;
-
+		Integer lNextByte;
+		StringBuilder sb = new StringBuilder();	
 		
 		
-		ArrayList<Byte> lArray = new ArrayList<Byte>();
-		Integer lNextByte = 0;
-		 while((lNextByte = fInputStream.read()) != LF) {
-			 lArray.add(lNextByte.byteValue());
-			 System.out.print(lNextByte.byteValue() + ":" + (char) lNextByte.byteValue());
-		 }
-		
-		
-		 
-		 //remove the starting / character and endline characters. work from the end of the list toward the front
-		 for(int i = lArray.size() - 1; i >= 0; i--)
-		 {
+		while(!finsihedReadingData) {
+			lNextByte = fInputStream.read();
+			//first need to read the ID message, which is: start character, address, end character, carriage return, line feed.			
 			
-			 char lChar = (char)lArray.get(i).byteValue();
-			 System.out.println(lChar);
-			if(lChar== START ||lChar==CR || lChar== LF || lChar ==END) {
-				lArray.remove(i);
+			if(!(lNextByte > 0)) {
+				fLogger.error("SmartMeterStreamReader  " + fWorkerID + " has abnormally ended while attempting to read the Identification message" );
+				//TODO Potentially throw a new exception here
+				return null;
 			}
 			
-		 }
-	
-		 //now we should have just the Meter ID.
-		 StringBuilder sb = new StringBuilder();	
-		 for(Byte b : lArray) {
-			 sb.append((char)b.byteValue());
-		 }
-		 
+			//lets make this easy for me to read
+			// this is the char of this current byte
+			char lChar =(char) lNextByte.byteValue();
+			
+			//if these are the endline characters, ignore them.
+			if(seenStartCharacter) {
+				// if we have not seen the last three characters
+				if(!(lChar == END | lChar == CR | lChar == LF))	{
+					sb.append(lChar);
+					
+				}
+			} else{
+				if(lChar == START) {
+					seenStartCharacter = true;
+				} else {
+					fLogger.error("SmartMeterStreamReader  " + fWorkerID + ". Malformed Indentifcation packet" );
+					//TODO Potentially throw a new exception here
+					return null;
+				}
+				
+			}		
+					
+		}
+		
 		//Id should be in the form of ABCDabcd 1234
 		//remove the leading 0's
 		while(sb.charAt(0) == '0'){
 			sb.deleteCharAt(0);
 		}
-		//catch invalid smart meter IDs
-		if(sb.length() == 0) throw new IOException("The Smart Meter ID read in was incorrectly formatted!");
-		
-		fLogger.debug("SmartMeterStreamReader Worker" + fWorkerID + " read in ID of: " + sb.toString());
 		
 		return sb.toString();
 		
@@ -267,25 +264,27 @@ public class SmartMeterStreamReader extends StreamReader {
 /**
  * Reads bytes from the input stream, and stores them in aArray.
  * This is done as we need to perform the redundancy on the bytes and match it to the received one
+ * 
  * @param aArray
  * @return the received Block Check Character (BCC) from the smart meter.
  * @throws IOException 
  */
  private char readDataMessageIntoByteArray(ArrayList<Byte> aArray) throws IOException {
 	 aArray.clear();
-	 Integer lNextByte = 0;
-	 
-	 while((lNextByte = fInputStream.read()) != ETX) {
-
-		 System.out.print((char)lNextByte.byteValue());
-     //while((lNextByte = fInputStream.read()) > 0) {
+	 Integer lNextByte = -1;
+	 while(   (lNextByte = fInputStream.read()) > 0) {
 		 //TODO might gave to remove the STX from this list (from the specification) i need to clarify this.
 		//need to add all the bytes to the list, including EXT 
 		 aArray.add(lNextByte.byteValue());
-		 	 
+		 
+		 if(lNextByte.byteValue() == ETX) {
+			 //return the next character, which is the block check character.
+			 return (char) fInputStream.readByte();
+			
+		}
 		 
 	 }	 
-	 return (char) fInputStream.readByte();
+	return 0;	 
  }
 	
 	

@@ -11,10 +11,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  */
 public class DataQueue {
-	protected BlockingQueue<ArrayList<SmartMeterDataMap>> fQueue;
+	private BlockingQueue<ArrayList<SmartMeterDataMap>> fQueue;
 	
 	/**
-	 * Creates a new FIFO DataQueue. 
+	 * Creates a new SmartMeterDataQueue
 	 * @param aSize. The maximum size of the Queue. If you want an unbounded queue, use 0 as the input.
 	 */
 	public DataQueue(Integer aSize) {
@@ -31,7 +31,9 @@ public class DataQueue {
 	
 	/**
 	 * Put an element into the tail of underlying Blocking Queue.
+	 * TODO how to handle exceptions correctnly
 	 * @param aList The list to add to the queue.
+	 * @return true If the operation was successful
 	 * @throws InterruptedException 
 	 */
 	public void put(ArrayList<SmartMeterDataMap> aList) throws InterruptedException {
@@ -40,7 +42,7 @@ public class DataQueue {
 	
 	/**
 	 * Retrieves, but does not remove, the head of this queue, or returns null if this queue is empty.
-	 * @return The element at the head of the queue, or null  if empty.
+	 * @return The element at the head of the queue, or empty if empty.
 	 */
 	public ArrayList<SmartMeterDataMap> peek(){
 		return fQueue.peek();
@@ -62,13 +64,5 @@ public class DataQueue {
 		return fQueue.take();
 	}
 	
-	/**
-	 * get the size of the queue
-	 * @return the number of elements in the queue
-	 * 
-	 */
-	public int size() {
-		return fQueue.size();
-	}
 	
 }
