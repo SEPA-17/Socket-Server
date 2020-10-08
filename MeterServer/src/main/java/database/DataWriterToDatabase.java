@@ -9,7 +9,6 @@ import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import socketserver.ServerToDatabase;
 import socketserver.SmartMeterDataEnum;
 import socketserver.SmartMeterDataMap;
 
@@ -19,7 +18,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Writes data output to Database.
  * 
- * @author Michael
+ * @author Michael S
  *
  */
 public class DataWriterToDatabase {
@@ -35,7 +34,7 @@ public class DataWriterToDatabase {
 	private static String SQL_METER_DATA = "INSERT INTO MeterData (MeterId, ReadAt, KWH, KW, KVA, KVAr, Ph1i, Ph2i, Ph3i, Ph1v, Ph2v, Ph3v, PF) VALUES (?, STR_TO_DATE(?, '%m/%d/%y %H:%i:%s'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1.0)";
 
 	/**
-	 * Write the data to the Batabase
+	 * Write the data to the Database
 	 * 
 	 * @param aData
 	 * @throws SQLException

@@ -1,4 +1,4 @@
-package socketserver;
+package database;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +17,11 @@ import org.apache.commons.beanutils.PropertyUtils;
 // go to, File -> Project Structure -> Modules
 // make sure, mysql:mysql-connector-java:8.0.15 is Compile in Scope column
 
+/**
+ * 
+ * @author Heng and Michael S
+ *
+ */
 public class ServerToDatabase {
 
     // private static String URL =

@@ -23,7 +23,7 @@ public class LineStreamReader extends StreamReader{
 	 */
 	public LineStreamReader(DataInputStream aDataInputStream, DataOutputStream aDataOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData,Integer aWorkerID) {
 
-		super(aDataInputStream, aDataOutputStream, aSmartMeterData);
+		super(aDataInputStream, aDataOutputStream, aSmartMeterData, aWorkerID);
 		// TODO Auto-generated constructor stub
 		fLogger = LoggerFactory.getLogger(LineStreamReader.class);
 		fWorkerID = aWorkerID;
@@ -33,7 +33,9 @@ public class LineStreamReader extends StreamReader{
 
 	@Override
 	public Boolean parse() throws IOException {
-		fLogger.debug("LineStreamReader Started");
+		fLogger.debug(String.format("LineStreamReader worker %d connected!", fWorkerID ));
+		super.fOutputStream.writeBytes("Connected to SmartMeterServerWorker" + fWorkerID + "!");
+		super.fOutputStream.flush();
 
 		// TODO Auto-generated method stub
 		byte[] lBuffer = new byte[5];
@@ -81,7 +83,7 @@ public class LineStreamReader extends StreamReader{
 						lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_1_VOLTAGE, lValues[9]);
 						lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_2_VOLTAGE, lValues[10]);
 						lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_3_VOLTAGE, lValues[11]);
-						lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_3_VOLTAGE, lValues[12]);
+						lTempDataMap.setValueAt(SmartMeterDataEnum.POWER_FACTOR, lValues[12]);
 
 						//add line reading to the list of readings
 						this.fSmartMeterData.add(lTempDataMap);
@@ -95,7 +97,7 @@ public class LineStreamReader extends StreamReader{
 						break;
 					} else {
 						sb.append((char)b);
-						System.out.print((char)b);
+						//System.out.print((char)b);
 					}
 
 				}
@@ -108,7 +110,7 @@ public class LineStreamReader extends StreamReader{
 		super.fOutputStream.writeBytes("Java Server Worker " + fWorkerID + " sent " + fSmartMeterData.size() +" lines of Data!");
 		super.fOutputStream.flush();
 		super.fOutputStream.close();
-		System.out.println("Finished!");
+		
 	//	fLogger.
 
 

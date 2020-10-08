@@ -4,7 +4,7 @@ import java.util.EnumMap;
 
 /**
  * This is class that will hold the parsed data. It is a wrapper class for an EnumMap.
- * THis is  used to make handling the data received from the SmartMeter simple and clear.
+ * This is  used to make handling the data received from the SmartMeter simple and clear.
  * 
  * 
  * @author Steerpike
@@ -13,6 +13,9 @@ import java.util.EnumMap;
 public class SmartMeterDataMap {
 	private EnumMap<SmartMeterDataEnum,String> fDataMap;
 	
+	/**
+	 * Create a new instance of the SmartMeterDataMap. This  map is used to store a single row of collected data from the SmartMeter.
+	 */
 	public SmartMeterDataMap() {
 		fDataMap = new EnumMap<SmartMeterDataEnum,String>(SmartMeterDataEnum.class);
 		
@@ -29,10 +32,10 @@ public class SmartMeterDataMap {
 	}
 	
 	/**
-	 *  Set the value at a given Enum.
-	 * @param aKey The name of the value to map, given by the elements in SmartMeterDataEnum
-	 * @param aValue  The value to map
+	 *  Set the value at a given SmartMeterDataEnum key. If there is an exisiting value, it will be overwritten with the new value.
 	 *  
+	 * @param aKey The name of the value to map, given by the elements in SmartMeterDataEnum
+	 * @param aValue  The new value of the assoisated key given.
 	 */
 	public void setValueAt(SmartMeterDataEnum aKey , String aValue) {
 		fDataMap.put(aKey, aValue);
@@ -40,6 +43,7 @@ public class SmartMeterDataMap {
 	
 	/**
 	 * Get the Data Map as a String
+	 * @return The Datamap as a string
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
