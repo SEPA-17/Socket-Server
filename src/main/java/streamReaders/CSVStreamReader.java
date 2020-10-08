@@ -12,8 +12,8 @@ import socketserver.SmartMeterDataMap;
 
 public class CSVStreamReader extends StreamReader {
 
-	protected CSVStreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData) {
-		super(aDataInputStream, aOutputStream, aSmartMeterData);
+	protected CSVStreamReader(DataInputStream aDataInputStream, DataOutputStream aOutputStream, ArrayList<SmartMeterDataMap> aSmartMeterData, Integer aWorkerID) {
+		super(aDataInputStream, aOutputStream, aSmartMeterData,aWorkerID);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -48,7 +48,7 @@ public class CSVStreamReader extends StreamReader {
 			lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_1_VOLTAGE, lValues[9]);
 			lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_2_VOLTAGE, lValues[10]);
 			lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_3_VOLTAGE, lValues[11]);
-			lTempDataMap.setValueAt(SmartMeterDataEnum.PHASE_3_VOLTAGE, lValues[12]);
+			lTempDataMap.setValueAt(SmartMeterDataEnum.POWER_FACTOR, lValues[12]);
 			
 			//add line reading to the list of readings
 			this.fSmartMeterData.add(lTempDataMap);

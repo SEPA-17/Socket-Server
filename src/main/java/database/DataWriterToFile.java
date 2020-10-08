@@ -6,33 +6,38 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import socketserver.SmartMeterDataEnum;
 import socketserver.SmartMeterDataMap;
 
 /**
- * Writes data output to file
+ * Writes Smartmeter data and places it in a file.
  * @author Michael
  *
  */
-//TODO implment this from DataWriter superclass.
+
 public class DataWriterToFile {
 	Integer fWorkerID;
+	private final Logger fLogger;
 	/**
 	 * Writes data to file
-	 * @param aWorkerID
+	 * @param aWorkerID the identifier for this worker.
 	 */
 	public DataWriterToFile(Integer aWorkerID) {
 		fWorkerID = aWorkerID;
+		fLogger = LoggerFactory.getLogger(DataWriterToFile.class);
 	
 	}
 	
 	/**
-	 * Write to data to file;
-	 * @param aDataToPush
+	 * Writes to data to file. 
+	 * @param aDataToPush An array List of Data lines read in from a SmartMeter.
 	 */
 	public void write(ArrayList<SmartMeterDataMap> aDataToPush) {
-		String lFilePath = System.getProperty("user.dir") + "/logs/dataWriterWorkerNo" + fWorkerID.toString() +".log";
-		
+		String lFilePath = System.getProperty("user.dir") + "/data/dataWriterWorkerNo" + fWorkerID.toString() +".data";
+		fLogger.debug(String.format("Thread %d writiing data to file: %s", fWorkerID, lFilePath));
 		//autoclose these resources on error
 		try (
 				FileWriter fw = new FileWriter(lFilePath, true);
@@ -66,8 +71,7 @@ public class DataWriterToFile {
 		} catch (IOException e) {
 		
 			
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			fLogger.error(e.toString());
 		}
 		
 	}

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import streamReaders.StreamReader;
 import streamReaders.LineStreamReader;
+import streamReaders.SmartMeterStreamReader;
 /**
  * SmartMeterHandlerWorker will handle a single Smart Meter connection. It will parse in the input stream, send data to the Smart Meter (if needed),
  * and then place the extracted data into the DataQueue.
@@ -68,6 +69,8 @@ public class SmartMeterHandlerWorker extends Thread {
 		 		
 				//Line Stream reader is a test reader.
 				StreamReader lReader = new LineStreamReader(fDataInputStream, fDataOutputStream, fSmartMeterData, fWorkerID);
+				//StreamReader lReader = new SmartMeterStreamReader(fDataInputStream, fDataOutputStream, fSmartMeterData, fWorkerID);
+				
 				//if we are able to successfully parse the data, then add the ArrayList to the queue to be pushed to the SQL.
 				//database
 				//the stored data is now located in the ArrayList fSmartMeterData.
