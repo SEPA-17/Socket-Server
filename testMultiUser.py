@@ -70,7 +70,7 @@ def connect_to_server(threadName, delay):
 # 	print("Error \n arguments should be in form: <ip address> <socket number> <number of threads> <number of packets to send>")
 # 	quit()
 
-ipaddressString = "54.253.49.19"
+ipaddressString = "52.63.98.160"
 portNumberString = "1234"
 numberOfThreads = "10"
 numberOfPackets = "5"
